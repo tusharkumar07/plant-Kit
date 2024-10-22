@@ -45,43 +45,44 @@ const Pesticides = () => {
         data={pesticidesData}
         renderItem={renderCard}
         keyExtractor={(item) => item.id}
-        // No need for numColumns for a single column
+        numColumns={2} // Set number of columns to 2
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  card: {
-    backgroundColor: '#f9f9f9',
-    marginVertical: 10,
-    borderRadius: 10,
-    padding: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-  },
-  image: {
-    width: Dimensions.get('window').width - 40, // Full width for single-column layout
-    height: 200,
-    borderRadius: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  description: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-});
+    container: {
+      flex: 1,
+      padding: 10,
+    },
+    card: {
+      flex: 1,
+      backgroundColor: '#f9f9f9',
+      margin: 10,
+      borderRadius: 10,
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOpacity: 0.2,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 4,
+    },
+    image: {
+      width: Dimensions.get('window').width / 2 - 40, // Adjust width to fit grid
+      height: 100,
+      borderRadius: 10,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginVertical: 10,
+    },
+    description: {
+      fontSize: 14,
+      textAlign: 'center',
+    },
+  });
 
 export default Pesticides;
