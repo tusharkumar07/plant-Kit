@@ -1,10 +1,12 @@
 import React from 'react';
 import About from './About';
 import Contact from './Contact';
-import Service1 from './Service1';
-import Service2 from './Service2';
-import Service3 from './Service3';
+import Service1 from './Homep';
+import Service2 from './Tutorials';
+import Service3 from './Profile';
+import Service4 from './Shop';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons'; // Import icon library
 
 const Tab = createBottomTabNavigator();
 
@@ -16,32 +18,56 @@ export default function TrackLink() {
         inactiveTintColor: 'gray',
         labelStyle: {
           fontSize: 14,
-          fontWeight:"bold",
+          fontWeight: "bold",
         }
       }}
     >
       <Tab.Screen
-        name="Service 1"
+        name="Home"
         component={Service1}
         options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home-outline" color={color} size={size} /> // Icon for Home
+          ),
+          tabBarStyle: { paddingBottom: 3,paddingTop: 3 },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Shop"
+        component={Service4}
+        options={{
+          tabBarLabel: 'Shop',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="cart-outline" color={color} size={size} /> // Icon for Shop
+          ),
           tabBarStyle: { paddingBottom: 10 },
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Service 2"
+        name="Tutorials"
         component={Service2}
         options={{
+          tabBarLabel: 'Tutorials',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="book-outline" color={color} size={size} /> // Icon for Tutorials
+          ),
           tabBarStyle: { paddingBottom: 10 },
-          headerShown: false
+          headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Service 3"
+        name="Profile"
         component={Service3}
         options={{
-          tabBarStyle: { paddingBottom: 10},
-          headerShown: false
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="person-outline" color={color} size={size} /> // Icon for Profile
+          ),
+          tabBarStyle: { paddingBottom: 10 },
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

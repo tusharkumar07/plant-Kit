@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import FirstPage from './components/FirstPage';
 import SignUp from './components/SignUp';
+import Service1 from "./components/Homep"
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <stack.Screen name="SignUp" component={SignUp} options={{ title: 'TrakLink' }} />
         <stack.Screen name="Login" component={Login} options={{ title: 'TrakLink' }} />
         <stack.Screen name="Home" component={Home} options={{ title: ' ' }} />
+        <stack.Screen name="Service1" component={Service1} options={{ title: ' ' }} />
       </stack.Navigator>
     </NavigationContainer>
   );

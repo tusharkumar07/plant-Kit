@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Button, TextInput,ScrollView,ImageBackground } from 'react-native';
 import ServiceBg4 from "../images/Services4BgImg.jpg";
 import axios from "axios"
+import { BASE_URL } from "./url"; // Import BASE_URL from config
 
-const Service3 = () => {
+const Profile = () => {
   const [data, setData] = useState([]);
   const [code,setCode]=useState();
   const [show, setShow]= useState(1)
@@ -21,7 +22,7 @@ const Service3 = () => {
   useEffect(() => {
 
   const fetchTrainData = async () => {
-    axios.get("http://10.22.10.33:5000/stations").then((res)=>{
+    axios.get(`${BASE_URL}/stations`).then((res)=>{
       // console.log(res.data);
       setData(res.data);
   }).catch((err)=>{
@@ -33,7 +34,7 @@ const Service3 = () => {
 
   const searchData=()=>{
     setShow(2)
-    axios.get("http://10.22.10.33:5000/stations").then((res)=>{
+    axios.get(`${BASE_URL}/stations`).then((res)=>{
       // console.log(res.data);
       setSingleData(res.data);
   }).catch((err)=>{
@@ -99,7 +100,7 @@ const Service3 = () => {
   );
 };
 
-export default Service3;
+export default Profile;
 
 const styles=StyleSheet.create({
   textColor:{
