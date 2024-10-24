@@ -14,11 +14,11 @@ export default function TrackLink() {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: 'purple',
+        activeTintColor: '#4CAF50',
         inactiveTintColor: 'gray',
         labelStyle: {
           fontSize: 14,
-          fontWeight: "bold",
+          fontWeight: "600",
         }
       }}
     >
@@ -30,7 +30,7 @@ export default function TrackLink() {
           tabBarIcon: ({ color, size }) => (
             <Icon name="home-outline" color={color} size={size} /> // Icon for Home
           ),
-          tabBarStyle: { paddingBottom: 3,paddingTop: 3 },
+          tabBarStyle: { paddingVertical: 3 },
           headerShown: false,
         }}
       />
@@ -42,7 +42,7 @@ export default function TrackLink() {
           tabBarIcon: ({ color, size }) => (
             <Icon name="cart-outline" color={color} size={size} /> // Icon for Shop
           ),
-          tabBarStyle: { paddingBottom: 10 },
+          tabBarStyle: { paddingVertical: 3 },
           headerShown: false,
         }}
       />
@@ -54,7 +54,7 @@ export default function TrackLink() {
           tabBarIcon: ({ color, size }) => (
             <Icon name="book-outline" color={color} size={size} /> // Icon for Tutorials
           ),
-          tabBarStyle: { paddingBottom: 10 },
+          tabBarStyle: { paddingVertical: 3 },
           headerShown: false,
         }}
       />
@@ -66,7 +66,7 @@ export default function TrackLink() {
           tabBarIcon: ({ color, size }) => (
             <Icon name="person-outline" color={color} size={size} /> // Icon for Profile
           ),
-          tabBarStyle: { paddingBottom: 10 },
+          tabBarStyle: { paddingVertical: 3 },
           headerShown: false,
         }}
       />

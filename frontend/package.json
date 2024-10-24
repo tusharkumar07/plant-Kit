@@ -33,7 +33,9 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.2.0",
     "react-native-video": "^5.2.1",
-    "react-native-video-controls": "^2.8.1"
+    "react-native-video-controls": "^2.8.1",
+    "react-native-waves": "^1.2.5",
+    "react-wavify": "^1.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"

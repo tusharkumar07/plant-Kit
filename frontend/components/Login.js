@@ -63,7 +63,7 @@ export default function Login(props) {
                     </View>
 
                     <View style={styles.btnContainer}>
-                        <TouchableOpacity style={styles.loginButton} onPress={sendData}>
+                        <TouchableOpacity style={styles.loginButton} onPress={goToHome}>
                             <Text style={styles.buttonText}>Enter</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.signUpButton} onPress={goToSingUp}>
@@ -72,9 +72,9 @@ export default function Login(props) {
                     </View>
 
                     <Text style={styles.btnText}>New User? Click on Sign Up</Text>
-                    <TouchableOpacity style={styles.signUpButton} onPress={goToHome}>
+                    {/* <TouchableOpacity style={styles.signUpButton} onPress={goToHome}>
                             <Text style={styles.buttonText}>Home Page</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                 </ImageBackground>
             </View>
         </>

@@ -66,8 +66,9 @@ const Shop = () => {
     <>
       <Tab.Navigator
         tabBarOptions={{
-          style: { backgroundColor: 'lightblue', paddingTop: 50 }, 
-          labelStyle: { fontWeight: 'bold', fontSize: 11 },
+          style: { backgroundColor: '#4CAF50', paddingTop: 50 }, 
+          labelStyle: { fontWeight: 'bold', fontSize: 14, color: 'white' },
+          
         }}
       >
         <Tab.Screen

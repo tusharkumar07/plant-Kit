@@ -1,207 +1,186 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Button, TextInput,ScrollView,ImageBackground } from 'react-native';
-import ServiceBg4 from "../images/Services4BgImg.jpg";
-import axios from "axios"
-import { BASE_URL } from "./url"; // Import BASE_URL from config
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Modal, TouchableOpacity, Image } from "react-native";
 
-const Profile = () => {
-  const [data, setData] = useState([]);
-  const [code,setCode]=useState();
-  const [show, setShow]= useState(1)
-  const [singleData,setSingleData] =useState();
+export default function Profile(props) {
+  const [logOut, setLogOut] = useState(false);
 
-  const showData=()=>{
-    setShow(false);
-    console.log("button clicked");
-  }
-
-  const hideData=()=>{
-    setShow(1);
-  }
-
-  useEffect(() => {
-
-  const fetchTrainData = async () => {
-    axios.get(`${BASE_URL}/stations`).then((res)=>{
-      // console.log(res.data);
-      setData(res.data);
-  }).catch((err)=>{
-      console.log(err);
-  })
+  const sendBack = () => {
+    setLogOut(true);
   };
-    fetchTrainData();
-  }, []);
 
-  const searchData=()=>{
-    setShow(2)
-    axios.get(`${BASE_URL}/stations`).then((res)=>{
-      // console.log(res.data);
-      setSingleData(res.data);
-  }).catch((err)=>{
-      console.log(err);
-  })
-  }
-
-  
-  // Render each item in the FlatList
-  const renderItems = ({ item }) => (
-    <View style={styles.dataContainer}>
-      <Text style={styles.resultData}>Station Name : {item.station_name}</Text>
-      <Text style={styles.resultData}>Station Code : {item.station_code}</Text>
-      <Text style={styles.resultData}>State : {item.state_name}</Text>
-    </View>
-  );
-
-  const renderSingleItem = ({ item }) => {
-    if (code.toUpperCase() === item.station_code) {
-      return (
-        <View style={styles.singleDataContainer}>
-          <Text style={styles.resultSingleData}>Station: {item.station_name}</Text>
-          <Text style={styles.resultSingleData}>Station Code: {item.station_code}</Text>
-          <Text style={styles.resultSingleData}>State: {item.state_name}</Text>
-        </View>
-      );
-    } else {
-      return null;
-    }
+  const loggingOut = () => {
+    setLogOut(false);
+    props.navigation.navigate("Login");
   };
-  
+
+  const stayLogIn = () => {
+    setLogOut(false);
+    props.navigation.navigate("About");
+  };
 
   return (
-    <ScrollView>
-    <ImageBackground source={ServiceBg4} style={styles.backgroundImage}>
-      {show ==1 ?<>
-        <View style={styles.serachContainer}>
-          <TextInput style={styles.SearchInput} placeholder='Enter Station Code' value={code} 
-              onChangeText={(e)=>{setCode(e)}}/>
-          <View style={styles.btnView}>
-              <Button title='Search' color="purple" onPress={searchData}/>
+    <>
+      <View style={Styles.container}>
+        <Image
+          source={{ uri: 'https://img.freepik.com/premium-photo/man-orange-vest-is-kneeling-field-with-man-vest_644690-88538.jpg?uid=R169335753&ga=GA1.1.1112546074.1729362380&semt=ais_hybrid' }}
+          style={Styles.image}
+        />
+        {/* User Information */}
+        <View style={Styles.infoContainer}>
+          <Text style={Styles.labelText}>Username</Text>
+          <Text style={Styles.infoText}>Tushar Kumar</Text>
+        </View>
+        <View style={Styles.infoContainer}>
+          <Text style={Styles.labelText}>Email</Text>
+          <Text style={Styles.infoText}>tushar@gmail.com</Text>
+        </View>
+        <View style={Styles.infoContainer}>
+          <Text style={Styles.labelText}>Location</Text>
+          <Text style={Styles.infoText}>Una</Text>
+        </View>
+
+        {/* Navigation Links */}
+        <View style={Styles.navigationContainer}>
+          <TouchableOpacity style={Styles.navButton} onPress={() => props.navigation.navigate('Home')}>
+            <Text style={Styles.navButtonText}>Home</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={Styles.navButton} onPress={() => props.navigation.navigate('Shop')}>
+            <Text style={Styles.navButtonText}>Shop</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={Styles.navButton} onPress={() => props.navigation.navigate('Tutorials')}>
+            <Text style={Styles.navButtonText}>Tutorials</Text>
+          </TouchableOpacity>
+
+          {/* Log Out Button */}
+          <TouchableOpacity style={Styles.navButton} onPress={sendBack}>
+            <Text style={Styles.navButtonText}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Log Out Confirmation Modal */}
+        <Modal animationType={"slide"} transparent={true} visible={logOut}>
+          <View style={Styles.border}>
+            <Text style={Styles.words}>Are you sure you want to log out?</Text>
+            <View style={Styles.btnBox}>
+              <TouchableOpacity style={Styles.btnLogOut} onPress={loggingOut}>
+                <Text style={Styles.btnText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.btnStayIn} onPress={stayLogIn}>
+                <Text style={Styles.btnText}>No</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-      </View> 
-        <Text style={styles.Results}>Result for Station</Text>
-      <FlatList
-  data={data}
-  keyExtractor={(item) => (Math.random().toString())}
-  renderItem={renderItems} />
-      </>:
-      <>
-      <View style={styles.btnViewSingle}>
-          <Button title='Go Back' color="purple" onPress={hideData}/>
+        </Modal>
       </View>
-      <Text style={styles.Results}>Result for Station</Text>
-      <FlatList
-  data={singleData}
-  keyExtractor={(item) => (Math.random().toString())}
-  renderItem={renderSingleItem} />
-      </>}
-      
-      </ImageBackground>
-    </ScrollView>
+    </>
   );
-};
+}
 
-export default Profile;
-
-const styles=StyleSheet.create({
-  textColor:{
-    color:"black",
-    backgroundColor:"#dcdde1"
-  },dummyData:{
-    textAlign:'center',
-    marginTop:20,
-    fontSize:20
-  },
-  backgroundImage: {
+const Styles = StyleSheet.create({
+  container: {
     flex: 1,
-    resizeMode: 'contain',
     justifyContent: "center",
-    width:"100%"
-  },     
-  serachContainer:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-around',
-    marginTop:20
+    alignItems: "center",
+    backgroundColor:"#e0f7fa"
+    // backgroundColor: "#f5f5f5",
   },
-  SearchInput:{
-    textAlign:"center",
-    padding:8,
-    width:250,
-    textAlign:'center',
-    backgroundColor:"white",
-    color:"black",elevation:15,
-    borderRadius:10,
-    marginTop:25
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
   },
-  border:{
-    borderWidth:2,
-    borderColor:"red",
-    marginBottom:3
+  infoContainer: {
+    marginBottom: 15,
+    alignItems: "center",
+    paddingHorizontal: 20,
+    backgroundColor:"#f5f5f5",
+    // backgroundColor: "#e0f7fa",
+    paddingVertical: 10,
+    borderRadius: 10,
+    width: '80%',
   },
-  btnView:{
-    marginRight:10,
-    marginLeft:-20,
-    marginTop:25
+  labelText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#00796B",
+    marginBottom: 5,
   },
-  btnViewSingle:{
-    marginRight:10,
-    marginLeft:100,
-    marginTop:100,
-    marginBottom:30,
-    width:200
+  infoText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#004D40",
   },
-  Results:{
-    marginTop:20,
-    textAlign:'center',
-    fontSize:20,
-    fontWeight:'700',
-    borderBottomWidth:1,
-    borderBottomColor:"white",
-    paddingBottom:10,
-    color:"white",
-    fontWeight:'800',
-    marginLeft:90,
-    marginRight:90,
-    marginBottom:30
+  navigationContainer: {
+    marginTop: 30,
+    width: '80%',
   },
-  dataContainer:{
-    borderWidth:1,
-    margin:10,
-    borderColor:"white",
+  navButton: {
+    backgroundColor: "#4CAF50",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 15,
+    alignItems: "center",
   },
-  singleDataContainer: {
-    paddingLeft:60,
+  navButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  border: {
     borderWidth: 2,
-    paddingTop:20,
-    margin: 10,
-    borderColor: 'purple',
-    elevation: 5,
-    marginLeft:10,
-    marginBottom:220,
-    marginTop:70
+    borderRadius: 10,
+    width: 250,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 520,
+    marginLeft: 70,
+    padding: 25,
+    backgroundColor: "#f7f1e3",
   },
-  resultData:{
-    textAlign:'justify',
-    marginBottom:10,
-    fontSize:15,
-    color:"white",
-    fontWeight:'900'
+  words: {
+    fontWeight: "900",
+    fontSize: 18,
+    textAlign: "center",
   },
-  resultSingleData:{
-    textAlign:'justify',
-    marginBottom:20,
-    fontSize:20,
-    color:"white",
-    fontWeight:'200'
+  btnBox: {
+    flexDirection: "row",
+    marginTop: 15,
   },
-  dataContainer:{
-    marginBottom:30,
-    paddingLeft:15,
-    paddingRight:15,
-    paddingTop:20,
-    borderWidth:1,
-    paddingBottom:20,
-  }
-})
-
+  btnLogOut: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 10,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 80,
+  },
+  btnStayIn: {
+    backgroundColor: "green",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 80,
+  },
+  btnLogOutMain: {
+    backgroundColor: "purple",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 150,
+  },
+  btnText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  showMessage: {
+    color: "white",
+    marginBottom: 20,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+});
